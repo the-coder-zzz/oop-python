@@ -7,31 +7,31 @@ class Pizza:
         for i in self.toppings:
             print(i)
 
-class Pineapple:
+class MixinPineapple:
     def add_pineapple(self):
         print('Adding pineapple!')
         self.toppings += ['pineapple']
 
-class Pepperoni:
+class MixinPepperoni:
     def add_pepperoni(self):
         print('Adding pepperoni!')
         self.toppings += ['pepperoni']
 
-class Olives:
+class MixinOlives:
     def add_olives(self):
         print('Adding olives!')
         self.toppings += ['olives']
 
-class MothersPizza(Pineapple, Olives, Pizza):
+class MothersPizza(MixinPineapple, MixinOlives, MixinPizza):
     def prepare_pizza(self):
         self.add_pineapple()
         self.add_olives()
 
-class MyPizza(Pepperoni, Pizza):
+class MyPizza(MixinPepperoni, MixinPizza):
     def prepare_pizza(self):
         self.add_pepperoni()
 
-class DadsPizza(MothersPizza, MyPizza):
+class DadsPizza(MixinMothersPizza, MixinMyPizza):
     def prepare_pizza(self):
         return MothersPizza.prepare_pizza(self) or MyPizza.prepare_pizza(self)
 
